@@ -1,0 +1,428 @@
+\documentclass[a4paper]{article}
+
+%  math support
+\usepackage{mathtools}
+\usepackage{autobreak}
+\usepackage{extarrows}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage{amssymb}
+\usepackage{esint}
+% \usepackage{amsmath}
+\usepackage{hyperref}
+
+% theorems
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{defi}[thm]{Definition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{coro}[thm]{Corollary}
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\sffamily\bfseries}
+    \theorembodyfont{\normalfont}
+    % auto add \QED
+    \theoremsymbol{\mbox{$\Box$}}
+    \newtheorem{proof}{Proof}[section]
+}
+{
+    \theoremstyle{nonumberplain}
+    \newtheorem{myDef}{Definition}
+}
+% abbr
+\newcommand*\Laplace{\mathop{}\!\mathbin\bigtriangleup}
+\newcommand\st{\quad \text{s.t.} \quad}
+\newcommand\diff{\,\mathrm{d}}
+\newcommand\compact{\subset \subset}
+\newcommand\xiff\xLongleftrightarrow
+\newcommand\ximpliedby\xLongleftarrow
+\newcommand\ximplies\xLongrightarrow
+\newcommand\xeq\xlongequal
+\newcommand\nto\nrightarrow
+
+% declare \norm macro
+\DeclarePairedDelimiter{\norm}\lVert\rVert
+\DeclarePairedDelimiter{\set}\lbrace\rbrace
+\DeclarePairedDelimiter{\abs}\lvert\rvert
+% Functional Analysis Symbols
+\def\L{\mathcal{L}}
+\def\K{\mathcal{K}}
+\def\R{\mathbb{R}}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\spann}{span}
+\DeclareMathOperator{\tr}{tr}
+
+\newcommand\spanset[1]{\ensuremath\spann\{#1\}}
+% \DeclareMathOperator{\dim}{dim}
+% domain range
+\DeclareMathOperator{\domain}{D}
+\DeclareMathOperator{\range}{R}
+
+\begin{document}
+\section{Solutions}
+\setcounter{proof}{3}
+\begin{proof}
+For $y = (a, b)$, set $y_1 = (a, -b)$, $y_2 = (-a, b)$, $y_3 = (-a, -b)$, then
+\begin{equation*}
+G(x, y) = \Gamma(x,y) - \Gamma(x,y_1) - \Gamma(x,y_2) + \Gamma(x,y_3)
+\end{equation*}
+\end{proof}
+\begin{proof}
+Set $x = (x_1, \cdots, x_n)$, $y = (a, 0, \cdots, 0)$, 
+then we use Poisson integral and maximum principle for harmonic functions to get
+\begin{equation*}
+\begin{split}
+& \int_{\partial B_1} \left[ (x_1 - a)^2 + x_2^2 + \cdots + x_n^2)\right]^{-n/2} \diff S_x \\
+={} & \int_{\partial B_1} \frac{\diff S_x}{\abs{x-y}^n}
+= \frac{1-\abs{y}^2}{n\omega_n}\int_{\partial B_1} \frac{n\omega_n}{1-\abs{y}^2}\frac{1}{\abs{x-y}^n} \diff S_x \\
+={} & \frac{n\omega_n}{1-\abs{y}^2}
+\end{split}
+\end{equation*}
+\end{proof}
+\setcounter{proof}{6}
+\begin{proof}
+We use the mean value inequalities for $u(x)$, for any ball $B(x,r) \subset \subset \R^n$, we have
+\begin{align*}
+\abs{u} &= \abs{\frac{1}{\omega_n r^n}\int_{B(x,r)} u \diff x} \\
+&\leq \frac{1}{\omega_n r^n}\int_{B(x,r)} \abs{u} \diff x \\
+&\leq (\omega_n r^n)^{-1/p}\norm{u}_{L_p(B(x,r))} \\
+&\leq (\omega_n r^n)^{-1/p}\norm{u}_{L_p(\R^n)} \to 0 \quad \text{as} \quad r \to \infty 
+\end{align*}
+Hence $u(x) = 0$
+\end{proof}
+\setcounter{proof}{8}
+\begin{proof}
+Set
+\begin{equation*}
+f(x) = x\log{x},
+\end{equation*}
+we have
+\begin{equation*}
+f'(x) = \log{x} + 1 \leq 0 \quad \text{in} \quad (0, 1/e], 
+\end{equation*}
+hence $f(x)$ is nonincreasing in $[0, 1/e]$. Since $f(x) \in C^1((1/e, 1])$, we consider $f(x)$ in $[0, 1/e]$. \\
+Set
+\begin{equation*}
+g(h) = f( x + h ) - f(x) - f(h),
+\end{equation*}
+we have
+\begin{equation*}
+g'(h) = \log{\frac{x+h}{h}} \geq 0 \quad \text{in} \quad (0, 1-x],
+\end{equation*}
+since $g(0)=0$, we have
+\begin{equation*}
+f(x) - f(x + h) \leq -f(h).
+\end{equation*}
+Since $f(x)$ is nonincreasing in $[0, 1/e]$, we have
+\begin{equation*}
+\abs{\frac{f(x)-f(x+h)}{h^\alpha}} = \frac{f(x)-f(x+h)}{h^\alpha} \leq -\frac{f(h)}{h^\alpha} = -h^{1-\alpha}\log{h}.
+\end{equation*}
+hence $f(x) \in C^{0,\alpha}[0,1]$, where $\alpha \in (0,1)$, and $f(x) \notin C^{0,1}[0,1]$.
+\end{proof}
+\begin{proof}
+Since $A,B$ are both positive-definite matrix, we have
+\begin{equation*}
+A = P\sqrt{\bar{A}}\sqrt{\bar{A}}P^T, \qquad B = Q\bar{B}Q^T.
+\end{equation*}
+Then
+\begin{align*}
+\det{A}\det{B} &= \det{(\sqrt{\bar{A}}P^TQ\bar{B}Q^TP\sqrt{\bar{A}}^T)} \\
+&\leq \left( \frac{\tr{(\sqrt{\bar{A}}P^TQ\bar{B}Q^TP\sqrt{\bar{A}}^T)}}{n} \right)^n \\
+&= \left( \frac{\tr{(AB)}}{n} \right)^n
+\end{align*}
+since $\sqrt{\bar{A}}P^TQ\bar{B}Q^TP\sqrt{\bar{A}}^T$ is positive-definite, and use AM-GM inequality.
+\end{proof}
+\setcounter{proof}{11}
+\begin{proof}
+WLOG $\forall x > 0$, $\eta \in (0,1)$, we consider $(x\eta, x)$, set
+\begin{equation*}
+u = \log{x}, \quad \bar{u} = \fint_{x\eta}^x \log{x} \diff x, \quad \tilde{u} = \fint_{x\eta}^x \abs{u - \bar{u}} \diff x, 
+\quad \bar{u}_0 = \fint_{\eta}^1 \log{t} \diff t.
+\end{equation*}
+Calculate
+\begin{align*}
+\bar{u} &= \fint_{\eta}^1 \log{xt} \diff t = \bar{u}_0 + \log{x} \\
+\tilde{u} &= \fint_{\eta}^1 \abs{\log{t} + \log{x} - \bar{u}} \diff t = \fint_{\eta}^1 \abs{\log{t} - \bar{u}_0} \diff t \\
+\bar{u}_0 &= \frac{\eta \log{\eta} - \eta + 1}{\eta - 1}.
+\end{align*}
+Since
+\begin{equation*}
+\fint_{\eta}^1 (\log{t} - \bar{u}_0) \diff t = 0
+\end{equation*}
+there exist $t_0 \in (\eta, 1)$ s.t. $\log{t_0} = \bar{u}_0$, hence
+\begin{equation*}
+\frac{1}{1 - \eta}\int_{t_0}^1 (\log{t} - \bar{u}_0) \diff t 
+= -\frac{1}{1 - \eta}\int^{t_0}_{\eta} (\log{t} - \bar{u}_0) \diff t \geq 0.
+\end{equation*}
+Then we have
+\begin{equation*}
+\tilde{u} = \frac{1}{1- \eta}\left( \int_{t_0}^1 - \int_{\eta}^{t_0} (\log{t} - \bar{u}_0) \right) \diff t 
+= \frac{2}{1-\eta}\int_{t_0}^1 (\log{t} - \bar{u}_0) \diff t
+\end{equation*}
+since
+\begin{equation*}
+\log{t} - \bar{u}_0 \leq \log{1} - \bar{u}_0 \leq 1
+\end{equation*}
+we have
+\begin{equation*}
+\tilde{u} \leq \frac{2(1-t_0)}{1-\eta} \leq 2.
+\end{equation*}
+Hence $\log{x} \in BMO(0,\infty)$.
+\end{proof}
+
+\section{G-T Chapter 2 Solutions}
+\setcounter{proof}{1}
+\begin{proof}
+Fix $x_0 \in T$, where $T$ is the open, smooth portion of $\partial \Omega$, then we can find $r > 0$, s.t. $B_r(x_0)$ is 
+divided into  two parts by $T$, then we extend $u$ with zero in $B_r(x_0)-\Omega$.
+
+Now we prove $u$ is harmonic in $B_r(x_0)$. Since $u$ is harmonic in $B_r(x_0) \cap \Omega$ and 
+$u \equiv 0$ in $B_r(x_0)-\Omega$, all we need to show is $u$ is harmonic in $B_r(x_0) \cap T$, 
+so we need prove for every ball $B_R(y) \subset \subset \Omega \cup B_r(x_0)$ it satisfies the mean value property, 
+where $y \in B_r(x_0) \cap T$. By the proof of the mean value inequalities, we only need to show
+\begin{equation}\label{2.2.1}
+\int_{\partial B_R(y)} \frac{\partial u}{\partial \nu} \diff s = 0.
+\end{equation}
+$u = \partial u/\partial \nu = 0$ on the smooth portion $T$ guarantees that $u \in C^1$ in $T$, 
+then we have the integral \eqref{2.2.1} is well-defined, since $u \equiv 0$ in $B_r(x_0) - \Omega$, we have
+\begin{equation*}
+\int_{\partial B_R(y)} \frac{\partial u}{\partial \nu} \diff s = \int_{B_R(x_0) \cap \Omega} \Laplace u \diff x = 0
+\end{equation*}
+hence $u$ is harmonic in $\Omega\cup B_r(x_0)$, and $u \equiv 0$ in $B_r(x_0) - \Omega$, by analytic, $u \equiv 0$ in $\Omega$.
+\end{proof}
+\begin{proof}
+\begin{enumerate}
+\item Fix $x,y \in \Omega$, $x \neq y$, write
+\begin{equation*}
+v(z) \coloneqq G(x, z), \quad w(z) \coloneqq G(y, z), \quad z \in \Omega,
+\end{equation*}
+then
+\begin{align*}
+\Laplace v(z) &= 0, \qquad z \neq x, \\
+\Laplace w(z) &= 0, \qquad z \neq y
+\end{align*}
+and $w = v = 0$ on $\partial\Omega$.
+Consider Green's identity on $\tilde{\Omega} \coloneqq \Omega\setminus[B_{\epsilon}(x)\cup B_{\epsilon}(y)]$
+\begin{align*}
+& \int_{\tilde{\Omega}} (v\Laplace w - w\Laplace v) \diff z
+= \int_{\partial\Omega} \left(v\frac{\partial w}{\partial\nu} - w\frac{\partial v}{\partial\nu}\right)\diff s \\
++{} & \int_{\partial B_{\epsilon}(x)} \left(v\frac{\partial w}{\partial\nu} - w\frac{\partial v}{\partial\nu}\right)\diff s
++ \int_{\partial B_{\epsilon}(y)} \left(v\frac{\partial w}{\partial\nu} - w\frac{\partial v}{\partial\nu}\right)\diff s,
+\end{align*}
+since $v, w$ is harmonic in $\tilde{\Omega}$, and vanishes on $\partial\Omega$, we have
+\begin{equation*}
+\int_{\partial B_{\epsilon}(x)} \left(v\frac{\partial w}{\partial\nu} - w\frac{\partial v}{\partial\nu}\right)\diff s
++ \int_{\partial B_{\epsilon}(y)} \left(v\frac{\partial w}{\partial\nu} - w\frac{\partial v}{\partial\nu}\right)\diff s = 0,
+\end{equation*}
+since
+\begin{equation*}
+\abs*{\int_{\partial B_{\epsilon}(x)} v\frac{\partial w}{\partial\nu}\diff s}
+\leq C\int_{\partial B_{\epsilon}(x)}\abs{v}\diff s \leq C\epsilon
+\end{equation*}
+and
+\begin{equation*}
+\lim_{\epsilon \to 0} \int_{\partial B_{\epsilon}(x)}\frac{\partial v}{\partial\nu}w\diff s
+= \lim_{\epsilon \to 0} \int_{\partial B_{\epsilon}(x)}\frac{\partial\Gamma}{\partial\nu}(x-z)w(z)\diff s = w(x).
+\end{equation*}
+Similarly we deduce the other integral to get $w(x) = v(y)$, hence $G(x,y) = G(y,x)$.
+\item Consider $w(x) = G(x,y) = \Gamma(x-y) + h$ is harmonic in $\Omega\setminus\set{y}$, since $h$ is harmonic in $\Omega$,
+and $\abs*{\Omega} < \infty$, we have $\abs{h} < \infty$ in $\Omega$. But when $x \to y$, $\Gamma(x-y) \to -\infty$,
+hence there exist $r > 0$ s.t. $w<0$ in $\partial B_r(y)$
+
+By the strong maximum principle, since $w(x) \equiv 0$ in $\partial\Omega$, we have $w<0$ in $\Omega\setminus B_r(y)$.
+\item Fix $x_0 \in \partial\Omega$, since $f$ is bounded, w.l.o.g, we assume $f(y) \equiv 1$, then
+\begin{equation*}
+\int_{\Omega} \abs{G(x,y)}\diff y = \int_{\Omega\cap B_{2\epsilon}(x_0)} \abs{G(x,y)}\diff y
++ \int_{\Omega\setminus B_{2\epsilon}(x_0)} \abs{G(x,y)}\diff y \eqqcolon I + J.
+\end{equation*}
+To estimate $I$, since $G(x_0, y) = 0$, for $\epsilon$ sufficiently small,
+we have $h(x,y) > 0$ where $x$ in $B_{\epsilon}(x_0)$, hence $\abs{G(x,y)} < \abs{\Gamma(x,y)}$,
+and $B_{2\epsilon}(x_0) \subset B_{3\epsilon}(x)$, so we have
+\begin{align*}
+I \leq \int_{\Omega\cap B_{3\epsilon}(x_0)} \abs{G(x,y)}\diff y
+\leq \int_{\Omega\cap B_{3\epsilon}(x_0)} \abs{\Gamma(x,y)}\diff y \leq C\epsilon^2,
+\end{align*}
+then we have
+\begin{align*}
+\lim_{x \to x_0}I = 0.
+\end{align*}
+To estimate $J$, we have
+\begin{align*}
+\abs{G(x,y)} \leq \abs{\Gamma(\epsilon)} \quad \forall y \in \Omega\setminus B_{2\epsilon}(x_0), x \in B_{\epsilon}(x_0),
+\end{align*}
+and for any fixed $y$
+\begin{align*}
+G(x,y) \to 0 \quad \text{as} \quad x \to x_0,
+\end{align*}
+use Lebesgue’s dominated convergence theorem, we have
+\begin{align*}
+\lim_{x \to x_0} J = 0,
+\end{align*}
+hence we completes the proof.
+\end{enumerate}
+\end{proof}
+\begin{proof}
+It is suffices to show that $U$ is harmonic on $T$, $\forall x \in T$.
+
+There is a ball $B = B(x)$, by the reflection, we have $U$ is continuous on $\partial B$,
+thus we can find a harmonic functions $v$ in $B$,
+and $v \equiv U$ on $\partial B$ by Poisson integral formula.
+
+Since $U$ is defined as odd reflection, use Poisson integral we have $v \equiv u \equiv 0$ on $T$,
+use the maximum principle on $\Omega^+\cap B$ and $\Omega^-\cap B$, we get $U \equiv v$ in $B$.
+Hence $U$ is harmonic in $\Omega^+\cup T\cup\Omega^-$.
+\end{proof}
+\begin{proof}
+WLOG we set the annular region as $B_{R}(0)\setminus B_r(0)$, where $R>r>0$.
+All we need to do is let the Green's function vanishes on $\partial B_R\cup\partial B_r$
+by combine the fundamental solution $\Gamma$.
+\begin{enumerate}
+\item Let it vanishes on $\partial B_R$, we have
+\begin{align*}
+h_1 = \Gamma(x,y) - \frac{\abs{y}}{R}\Gamma(x,\frac{R^2}{\abs{y}^2}y),
+\end{align*}
+\item let it vanishes on $\partial B_r$, we have
+\begin{align*}
+h_2 = h_1 - \frac{\abs{y}}{r}\Gamma(x,\frac{r^2}{\abs{y}^2}y) + \frac{R}{r}\Gamma(x,\frac{r^2}{R^2}y),
+\end{align*}
+\item let it vanishes on $\partial B_R$, we have
+\begin{align*}
+h_3 = h_2 + \frac{r}{R}\Gamma(x,\frac{R^2}{r^2}y) - \frac{r\abs{y}}{R^2}\Gamma(x,\frac{R^4}{r^2\abs{y}^2}y),
+\end{align*}
+\item let it vanishes on $\partial B_r$, we have
+\begin{align*}
+h_4 = h_3 - \frac{R\abs{y}}{r^2}\Gamma(x,\frac{r^4}{R^2\abs{y}^2}y) + \frac{R^2}{r^2}\Gamma(x,\frac{r^4}{R^4}y),
+\end{align*}
+\item let it vanishes on $\partial B_R$, we have
+\begin{align*}
+h_5 = h_4 + \frac{r^2}{R^2}\Gamma(x,\frac{R^4}{r^4}y) - \frac{r^2\abs{y}}{R^3}\Gamma(x,\frac{R^6}{r^4\abs{y}^2}y),
+\end{align*}
+\item $\cdots$
+\end{enumerate}
+Set
+\begin{align*}
+g_n &= \left(\frac{r}{R}\right)^{n-1}\Gamma(x,\left(\frac{r}{R}\right)^{2(1-n)}y)
+- \left(\frac{r}{R}\right)^{n-1}\frac{\abs{y}}{R}\Gamma(x, \left(\left(\frac{r}{R}\right)^{n-1}\frac{\abs{y}}{R}\right)^{-2}y) \\
+&- \left(\frac{R}{r}\right)^{n-1}\frac{\abs{y}}{r}\Gamma(x, \left(\left(\frac{R}{r}\right)^{n-1}\frac{\abs{y}}{r}\right)^{-2}y)
++ \left(\frac{R}{r}\right)^{n}\Gamma(x,\left(\frac{R}{r}\right)^{-2n}y),
+\end{align*}
+we get the Green's function
+\begin{align*}
+G(x,y) = \sum_{n=1}^\infty g_n
+\end{align*}
+where the RHS is convergence by M-test.
+\end{proof}
+\begin{proof}
+Fix $y \in B_R$, $\forall x \in B_R$
+\begin{align*}
+\abs*{\frac{x-y}{R-\abs{y}}} \geq 1 = \abs*{\frac{x}{R}},
+\end{align*}
+hence
+\begin{align*}
+(R-\abs{y})^n\int_{\partial B_R} \frac{u\diff s}{\abs{x-y}^n} \leq R^n \int_{\partial B_R} \frac{u\diff s}{\abs{x}^n},
+\end{align*}
+it implies that
+\begin{align*}
+u(y) \leq \frac{R^{n-2}(R+\abs{x})}{(R-\abs{x})^{n-1}}u(0).
+\end{align*}
+Similarly we can get the lower bound.
+\end{proof}
+\begin{proof}
+$\forall z \in \partial\Omega$, w.l.o.g we assume $z = 0$ and $x_n = 0$ is the tangent hyperplane of $\partial\Omega$ at $z$.
+By the definition of $C^2$ boundary, we can choose $x_n = 0$ as the supporting hyperplane and define a support function $f$
+in $B_{\epsilon}$ is $C^2(\R^{n-1})$ and satisfying
+\begin{align*}
+f(x') = x_n > 0 \quad \text{in} \quad B_{\epsilon}\setminus\set{0} \text{, and} \quad f(0)=0,
+\end{align*}
+where $x' = (x_1, \cdots, x_{n-1})$, and $(x',x_n) \in \partial\Omega$.
+Then we consider a ball $B_r(x_0)$ where $r \leq \epsilon$
+tangent with the supporting hyperplane $x_n = 0$ at $z$, we can define the support function
+\begin{align*}
+g(x') = r - \sqrt{r^2 - \abs{x'}^2},
+\end{align*}
+set $h=g-f$, and $h(0) = 0$, all we need to do is to prove there exist $r$ s.t. $D^2h(0)$ is positive-definite. Since
+\begin{align*}
+h_{ij} = (r^2 - \abs{x'}^2)^{-3/2}x_ix_j + \delta_{ij}(r^2 - \abs{x'}^2)^{-1/2} - \partial_{ij}f(x'),
+\end{align*}
+we have
+\begin{align*}
+\left(h_{ij}(0)\right) = r^{-1}I - (\partial_{ij}f(0)),
+\end{align*}
+hence we choose $r$ s.t.
+\begin{align*}
+\frac{1}{r} \geq \max{\abs{\lambda_i}},
+\end{align*}
+where $\lambda_i$ are eigenvalues of $D^2f(0)$.
+\end{proof}
+\setcounter{section}{3}
+\section{G-T Chapter 4 Solutions}
+\setcounter{proof}{6}
+\begin{proof}
+\begin{equation}\label{4.7.1}
+\begin{split}
+\Laplace_x u(x/\abs{x}^2)
+&= \sum_i \frac{\partial}{\partial x_i}\left(\sum_k\frac{\partial u}{\partial y_k}\frac{\partial y_k}{\partial x_i}\right)
+= \sum_i\sum_l\frac{\partial}{\partial y_l}\left(\sum_k\frac{\partial u}{\partial y_k}\frac{\partial y_k}{\partial x_i}\right)
+\frac{\partial y_l}{\partial x_i} \\
+&= \sum_i\sum_l\sum_k\left(\frac{\partial^2 u}{\partial y_l\partial y_k}\frac{\partial y_k}{\partial x_i}
++\frac{\partial^2 y_k}{\partial x_i\partial y_l}\frac{\partial u}{\partial y_k}\right)\frac{\partial y_l}{\partial x_i} \\
+&= \sum_i\sum_l\sum_k\frac{\partial^2 u}{\partial y_l\partial y_k}\frac{\partial y_k}{\partial x_i}
+\frac{\partial y_l}{\partial x_i} + \sum_i\sum_k\frac{\partial^2 y_k}{\partial x_i^2}\frac{\partial u}{\partial y_k}
+\end{split}
+\end{equation}
+since
+\begin{align*}
+\frac{\partial y_k}{\partial x_i} &= \partial_i \frac{x_k}{\abs{x}^2}
+= \frac{\delta_{ik}}{\abs{x}^2} - 2\frac{x_ix_k}{\abs{x}^4}, \\
+\frac{\partial^2 y_k}{\partial x_i^2}
+&= \frac{-2\delta_{ik}x_i}{\abs{x}^4} + 8\frac{x_i^2x_k}{\abs{x}^6}
+- 2\frac{x_k}{\abs{x}^4} - 2\frac{x_i\delta_{ik}}{\abs{x}^4} \\
+&= -4\frac{\delta_{ik}x_i}{\abs{x}^4} + 8\frac{x_i^2x_k}{\abs{x}^6} - 2\frac{x_k}{\abs{x}^4},
+\end{align*}
+we have
+\begin{align}
+\eqref{4.7.1} &= \sum_i\sum_l\sum_k\frac{\partial^2 u}{\partial y_l\partial y_k}
+\left(\frac{\delta_{ik}}{\abs{x}^2} - 2\frac{x_ix_k}{\abs{x}^4}\right)
+\left(\frac{\delta_{il}}{\abs{x}^2} - 2\frac{x_ix_l}{\abs{x}^4}\right) \label{4.7.a} \\
+&+ \sum_i\sum_k\frac{\partial u}{\partial y_k}\left(-4\frac{\delta_{ik}x_i}{\abs{x}^4}
++ 8\frac{x_i^2x_k}{\abs{x}^6} - 2\frac{x_k}{\abs{x}^4}\right) \label{4.7.b}.
+\end{align}
+For \eqref{4.7.a} we have
+\begin{align*}
+\eqref{4.7.a} &= \sum_i\sum_l\sum_k\frac{\partial^2 u}{\partial y_l\partial y_k}\frac{\delta_{ik}\delta_{il}}{\abs{x}^4}
+- 4\sum_l\sum_k\frac{\partial^2 u}{\partial y_l\partial y_k}\frac{x_kx_l}{\abs{x}^6}
++ 4\sum_i\sum_l\sum_k\frac{x_i^2x_kx_l}{\abs{x}^8} \\
+&= \sum_i\frac{\partial^2 u}{\partial y_i^2}\frac{1}{\abs{x}^4}
+- 4\sum_l\sum_k\frac{\partial^2 u}{\partial y_l\partial y_k}\frac{x_kx_l}{\abs{x}^6}
++ 4\sum_i\frac{x^2_i}{\abs{x}^2}\sum_l\sum_k\frac{x_kx_l}{\abs{x}^6} \\
+&= \sum_i\frac{\partial^2u}{\partial y_i^2}\frac{1}{\abs{x}^4},
+\end{align*}
+and for \eqref{4.7.b} we have
+\begin{align*}
+\eqref{4.7.b} &= -4\sum_k\frac{\partial u}{\partial y_k}\frac{x_k}{\abs{x}^4}
++ 8\sum_k\frac{\partial u}{\partial y_k}\frac{x_k}{\abs{x}^4}
+- 2n\sum_k\frac{\partial u}{\partial y_k}\frac{x_k}{\abs{x}^4} \\
+&= 2(2-n)\sum_k\frac{\partial u}{\partial y_k}\frac{x_k}{\abs{x}^4}.
+\end{align*}
+Consider
+\begin{align*}
+\Laplace v(x) = \Laplace{u(x)}\abs{x}^{2-n} + u(x)\Laplace{\abs{x}^{2-n}} + 2\nabla{u}\nabla{\abs{x}^{2-n}},
+\end{align*}
+since
+\begin{align*}
+\nabla{u}\nabla{\abs{x}^{2-n}} &= \sum_i\frac{\partial u}{\partial x_i}\frac{\abs{x}^{2-n}}{x_i}
+= \sum_i\left(\sum_j\frac{\partial u}{\partial y_j}\frac{\partial y_j}{\partial x_i}\right)(2-n)\abs{x}^{-n}x_i \\
+&= (2-n)\abs{x}^{-n}\sum_i\sum_j\frac{\partial u}{\partial y_j}
+\left(\frac{\delta_{ij}}{\abs{x}^2} - 2\frac{x_ix_j}{\abs{x}^4}\right)x_i \\
+&= (2-n)\left(\abs{x}^{-2-n}\sum_j\frac{\partial u}{\partial y_j}x_j
+-2\abs{x}^{-2-n}\sum_j\frac{\partial u}{\partial y_j}x_j\right) \\
+&= -(2-n)\abs{x}^{-2-n}\sum_j\frac{\partial u}{\partial y_j}x_j,
+\end{align*}
+hence
+\begin{align*}
+\Laplace v(x) &= \Laplace_yu\abs{x}^{-2-n} + 2(2-n)\sum_k\frac{\partial u}{\partial y_k}\frac{x_k}{\abs{x}^{2+n}}
+- 2(2-n)\sum_k\frac{\partial u}{\partial y_k}\frac{x_k}{\abs{x}^{2+n}} \\
+&= \Laplace_yu\abs{x}^{-2-n}.
+\end{align*}
+\end{proof}
+\end{document}
